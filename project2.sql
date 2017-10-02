@@ -28,7 +28,7 @@ INSERT INTO Music VALUES (13,  'Stairway to Heaven  ',  'Led Zeppelin  ',  'Clas
 
 --This is the Movie Table & Filler
 
-Create  table Movies (
+Create table Movies (
 	MovieId int NOT NULL,
 	Title varchar(255),
 	Director varchar(255),
@@ -55,35 +55,36 @@ INSERT INTO Movies VALUES (13,   'Die Hard  ',   'John McTiernan  ',   'Action  
 
 --This is the Book table & filler
 
-Create table Book(
-		ISBN int NOT NULL,
-		Title varchar(128) NOT NULL,
-		Author varchar(128) NOT NULL,
-		Pages smallint NOT NULL,
-		Genre varchar(32),
-		Pubyear tinyint,
-		PRIMARY KEY (ISBN)
+create table Books (
+	ISBN int(10) NOT NULL,
+    Title VARCHAR(255) NOT NULL,
+    Author VARCHAR(255) NOT NULL,
+    Pages int NOT NULL,
+    Genre VARCHAR(32),
+    PubYear YEAR,
+    PRIMARY KEY (ISBN)
 );
 
-INSERT INTO Book VALUES (0486406512,   "A Tale of Two Cities",   "Charles Dickens", 341,   "Historical Novel", 1859);
-INSERT INTO Book VALUES (0747532699,   "Harry Potter and the Sorcerer's Stone",   'J.K. Rowling  ', 309,   'Fantasy  ', 1997);
-INSERT INTO Book VALUES (0618968636,   'The Hobbit  ',   'J.R.R. Tolkien  ', 304,   'High Fantasy  ', 1937);
-INSERT INTO Book VALUES (0064404994,   'The Lion, the Witch, and the Wardrobe  ',   'C.S. Lewis  ', 208,   "Children's Fantasy", 1950);
-INSERT INTO Book VALUES (1400079179,   'The Da Vinci Code  ',   'Dan Brown  ', 454,   'Mystery  ', 2003);
-INSERT INTO Book VALUES (0439785960,   'Harry Potter and the Half-Blood Prince  ',   'J.K. Rowling  ', 542,   'Fantasy  ', 2005);
-INSERT INTO Book VALUES (0316769487,   'The Catcher in the Rye  ',   'J.D. Salinger  ', 214,   'Realistic Fiction  ', 1951);
-INSERT INTO Book VALUES (0439064872,   'Harry Potter and the Chamber of Secrets  ',   'J.K. Rowling  ', 341,   'Fantasy  ', 1998);
-INSERT INTO Book VALUES (0439136369,   'Harry Potter and the Prisoner of Azkaban  ',   'J.K. Rowling  ', 435,   'Fantasy  ', 1999);
-INSERT INTO Book VALUES (0553103547,   'A Game of Thrones  ',   'George R.R. Martin  ', 694,   'Epic Fantasy  ', 1996);
-INSERT INTO Book VALUES (0553801503,   'A Feast for Crows  ',   'George R.R. Martin  ', 976,   'Epic Fantasy  ', 2005);
-INSERT INTO Book VALUES (0439139600,   'Harry Potter and the Goblet of Fire  ',   'J.K. Rowling  ', 734,   'Fantasy  ', 2000,);
+
+INSERT INTO Books VALUES (0486406512,   "A Tale of Two Cities",   "Charles Dickens", 341,   "Historical Novel", 1859);
+INSERT INTO Books VALUES (0747532699,   "Harry Potter and the Sorcerer's Stone",   'J.K. Rowling  ', 309,   'Fantasy  ', 1997);
+INSERT INTO Books VALUES (0618968636,   'The Hobbit  ',   'J.R.R. Tolkien  ', 304,   'High Fantasy  ', 1937);
+INSERT INTO Books VALUES (0064404994,   'The Lion, the Witch, and the Wardrobe  ',   'C.S. Lewis  ', 208,   "Children's Fantasy", 1950);
+INSERT INTO Books VALUES (1400079179,   'The Da Vinci Code  ',   'Dan Brown  ', 454,   'Mystery  ', 2003);
+INSERT INTO Books VALUES (0439785960,   'Harry Potter and the Half-Blood Prince  ',   'J.K. Rowling  ', 542,   'Fantasy  ', 2005);
+INSERT INTO Books VALUES (0316769487,   'The Catcher in the Rye  ',   'J.D. Salinger  ', 214,   'Realistic Fiction  ', 1951);
+INSERT INTO Books VALUES (0439064872,   'Harry Potter and the Chamber of Secrets  ',   'J.K. Rowling  ', 341,   'Fantasy  ', 1998);
+INSERT INTO Books VALUES (0439136369,   'Harry Potter and the Prisoner of Azkaban  ',   'J.K. Rowling  ', 435,   'Fantasy  ', 1999);
+INSERT INTO Books VALUES (0553103547,   'A Game of Thrones  ',   'George R.R. Martin  ', 694,   'Epic Fantasy  ', 1996);
+INSERT INTO Books VALUES (0553801503,   'A Feast for Crows  ',   'George R.R. Martin  ', 976,   'Epic Fantasy  ', 2005);
+INSERT INTO Books VALUES (0439139600,   'Harry Potter and the Goblet of Fire  ',   'J.K. Rowling  ', 734,   'Fantasy  ', 2000);
 
 --This is the friends table & filer
 
 CREATE TABLE Friends (
 	FriendId int NOT NULL,
 	First varchar(255),
-	Last varchar(255),
+	Last varchar(255)
 );
 
 INSERT INTO Friends VALUES (1,   'Jeanelle  ',   'Acebedo  ');
@@ -100,33 +101,31 @@ INSERT INTO Friends VALUES (11,   'Tiny  ',   'Breitenstein  ');
 INSERT INTO Friends VALUES (12,   'Kathi  ',    'Breland  ');
 INSERT INTO Friends VALUES (13,   'Gregory  ',   'Ashe  ');
 
+--This is the Borrowed Section
+
 CREATE TABLE BorrowedBooks (
 	ISBN int NOT NULL,
 	FriendId int NOT NULL,
-	DateBorrowed DATE,
-	FOREIGN KEY (ISBN) REFERENCE Books(ISBN),
-	FOREIGN KEY (FriendId) REFERENCE Friends(FriendId)
-);
+	DateBorrowed DATE
+)Engine=InnoDB;
 
-INSERT INTO BorrowedBooks VALUES (0618968636, 3, 2017-08-15);
-INSERT INTO BorrowedBooks VALUES (1400079179, 4, 2017-08-15);
-INSERT INTO BorrowedBooks VALUES (0316769487, 8, 2017-08-15);
-INSERT INTO BorrowedBooks VALUES (0439064872, 9, 2017-08-15);
-INSERT INTO BorrowedBooks VALUES (0553103547, 3, 2017-08-15);
-INSERT INTO BorrowedBooks VALUES (0439139600, 11, 2017-08-15);
+INSERT INTO BorrowedBooks VALUES (0618968636, 3, '2017-08-15');
+INSERT INTO BorrowedBooks VALUES (1400079179, 4, '2017-08-15');
+INSERT INTO BorrowedBooks VALUES (0316769487, 8, '2017-08-15');
+INSERT INTO BorrowedBooks VALUES (0439064872, 9, '2017-08-15');
+INSERT INTO BorrowedBooks VALUES (0553103547, 3, '2017-08-15');
+INSERT INTO BorrowedBooks VALUES (0439139600, 11, '2017-08-15');
 
 CREATE TABLE BorrowedMovies (
 	MovieId int NOT NULL,
 	FriendId int NOT NULL,
-	DateBorrowed DATE,
-	FOREIGN KEY (MovieId) REFERENCE Movies(MovieId)
-	FOREIGN KEY (FriendId) REFERENCE Friends(FriendId)
+	DateBorrowed DATE
 );
 
-INSERT INTO BorrowedMovies VALUES (11, 5, 2017-09-27);
-INSERT INTO BorrowedMovies VALUES (7, 7, 2017-09-12);
-INSERT INTO BorrowedMovies VALUES (9, 2, 2017-09-14);
-INSERT INTO BorrowedMovies VALUES (2, 1, 2017-09-28);
-INSERT INTO BorrowedMovies VALUES (6, 4, 2017-09-11);
-INSERT INTO BorrowedMovies VALUES (8, 5, 2017-09-14);
-INSERT INTO BorrowedMovies VALUES (13, 5, 2017-09-22);
+INSERT INTO BorrowedMovies VALUES (11, 5, '2017-09-27');
+INSERT INTO BorrowedMovies VALUES (7, 7, '2017-09-12');
+INSERT INTO BorrowedMovies VALUES (9, 2, '2017-09-14');
+INSERT INTO BorrowedMovies VALUES (2, 1, '2017-09-28');
+INSERT INTO BorrowedMovies VALUES (6, 4, '2017-09-11');
+INSERT INTO BorrowedMovies VALUES (8, 5, '2017-09-14');
+INSERT INTO BorrowedMovies VALUES (13, 5, '2017-09-22');
