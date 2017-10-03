@@ -107,7 +107,7 @@ CREATE TABLE BorrowedBooks (
 	ISBN int NOT NULL,
 	FriendId int NOT NULL,
 	DateBorrowed DATE
-)Engine=InnoDB;
+);
 
 INSERT INTO BorrowedBooks VALUES (0618968636, 3, '2017-08-15');
 INSERT INTO BorrowedBooks VALUES (1400079179, 4, '2017-08-15');
@@ -129,3 +129,99 @@ INSERT INTO BorrowedMovies VALUES (2, 1, '2017-09-28');
 INSERT INTO BorrowedMovies VALUES (6, 4, '2017-09-11');
 INSERT INTO BorrowedMovies VALUES (8, 5, '2017-09-14');
 INSERT INTO BorrowedMovies VALUES (13, 5, '2017-09-22');
+
+CREATE TABLE BorrowedMusic (
+	MusicId int NOT NULL,
+	FriendId int NOT NULL,
+	DateBorrowed DATE
+);
+
+INSERT INTO BorrowedMusic VALUES (3, 3, '2017-09-21');
+INSERT INTO BorrowedMusic VALUES (5, 5, '2017-09-27');
+INSERT INTO BorrowedMusic VALUES (12, 4, '2017-09-02');
+INSERT INTO BorrowedMusic VALUES (8, 2, '2017-09-01');
+INSERT INTO BorrowedMusic VALUES (6, 1, '2017-09-12');
+INSERT INTO BorrowedMusic VALUES (10, 11, '2017-09-13');
+INSERT INTO BorrowedMusic VALUES (1, 6, '2017-09-15');
+
+
+/*
+Functioning Queries for the library
+
+This query checks to see how many songs of each genre we own.
+
+SELECT count(Genre) GenreCount, Genre FROM
+Music
+Group By Genre;
+
+This query checks to see what is the longest song for each genre that we own.
+
+SELECT max(SongLength) MaxSongLength, Title,Genre FROM
+Music
+GROUP BY GENRE;
+
+This query provides the owned songs that were released before 2000 and what album they were on. It also provides the artists name.
+
+SELECT Artist, Title,AlbumName FROM
+Music WHERE
+AlbumName != ’Single’ and 
+ReleaseDate < ‘2000-01-01’;
+
+This query shows the titles of books whose length is between 300 and 500 pages, and then sorts them by page length
+
+SELECT Title, Pages
+FROM Books 
+WHERE Pages >= 300 
+AND Pages <= 500 
+ORDER BY Pages;
+
+This query lists the title and author of any type of fantasy book
+
+SELECT Title, Author 
+FROM Book 
+WHERE Genre LIKE '%Fantasy%';
+
+This query lists all friends who are borrowing a book, the name of the book, and the date they borrowed it
+
+SELECT First, Last, Title, DateBorrowed 
+FROM Book, BorrowedBooks, Friends 
+WHERE Friends.FriendId = BorrowedBooks.FriendId 
+AND BorrowedBooks.ISBN = Book.ISBN;
+
+This query shows the total amount of money spent on Music and Movies
+
+SELECT (SELECT SUM(Price) FROM Music) 
++ (SELECT SUM(Price) FROM Movies) 
+AS TotalMoneySpent;
+
+This query lists the friends that have borrowed a movie and shows the date FROM closest to farthest
+
+SELECT First, Last, Title, DateBorrowed 
+FROM Friends, Movies, BorrowedMovies 
+WHERE Friends.FriendId = BorrowedMovies.FriendId 
+AND Movies.MovieId = BorrowedMovies.MovieId 
+ORDER BY DateBorrowed DESC;
+
+This query gives the Average price for Music and Movies together in one table
+
+SELECT AVG(Music.Price) AS AverageMusicPrice, 
+AVG(Movies.Price) AS AverageMoviePrice 
+FROM Music, Movies;
+
+
+This query displays the name of anyone who has borrowed a book, movie, and music, and displays the titles of the things they’ve borrowed
+
+SELECT First, Last, 
+Books.Title AS 'Books Title', 
+Movies.Title AS 'Movie Title', 
+Music.Title AS 'Song Title' 
+FROM Friends, Books, Music, Movies, BorrowedBooks, BorrowedMusic, BorrowedMovies 
+WHERE Friends.FriendId = BorrowedBooks.FriendId 
+AND Friends.FriendId = BorrowedMovies.FriendId 
+AND Friends.FriendId = BorrowedMusic.FriendId 
+AND BorrowedBooks.ISBN = Books.ISBN 
+AND BorrowedMusic.MusicId = Music.MusicId 
+AND BorrowedMovies.MovieId = Movies.MovieId;
+
+
+*/
