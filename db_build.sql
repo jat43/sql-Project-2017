@@ -1,0 +1,174 @@
+DROP DATABASE Students;
+
+CREATE TABLE Students(
+	Id INT NOT NULL PRIMARY KEY,
+	First VARCHAR(15),
+	Last VARCHAR(15),
+	Email VARCHAR(20),
+	Address VARCHAR(25),
+	City VARCHAR(15),
+	State VARCHAR(2),
+	PhoneNumber VARCHAR(15),
+	UserType VARCHAR(10)
+) ENGINE=InnoDB;
+
+INSERT INTO Students VALUES(31368219,'Nicholas','Schiliro','nvs29@njit.edu','100 OakTree Road','Newark','NJ','732-123-4567','Student');
+INSERT INTO Students VALUES(31368228,'Quinn','Cook','qc29@njit.edu','10 Main Street','Newark','NJ','732-123-8989','Student');
+INSERT INTO Students VALUES(31368300,'Julio','Torres','jt100@njit.edu','80 Washington Road','Woodbridge','NJ','732-483-4577','Student');
+INSERT INTO Students VALUES(31369217,'Samantha','Smith','ss887@njit.edu',' 900 Harrison Road','Linden','NJ','732-485-8790','Student');
+INSERT INTO Students VALUES(31366819,'Jeff','Johnson','jj290@njit.edu','150 Martin Luther King BLVD','Newark','NJ','732-100-5674','Student');
+INSERT INTO Students VALUES(31368450,'Mary','Vazquez','mv129@njit.edu','80 Sherwood Road','Perth Amboy','NJ','732-354-8768','Student');
+INSERT INTO Students VALUES(31368550,'Greg','Jones','gj429@njit.edu','100 Hamilton Road','Newark','NJ','732-423-4554','Student');
+INSERT INTO Students VALUES(31368534,'Jessica','Williams','jw295@njit.edu','1000 Hudson Road','Newark','NJ','732-433-4567','Student');
+INSERT INTO Students VALUES(31368809,'Brett','Miller','bm510@njit.edu','400 West River Road','Belmar','NJ','732-556-8567','Student');
+INSERT INTO Students VALUES(31368103,'Brianna','White','bw105@njit.edu','556 Thompson Road','Piscataway','NJ','732-097-4370','Student');
+
+DROP DATABASE Faculty;
+
+CREATE TABLE Faculty(
+	Id INT NOT NULL PRIMARY KEY,
+	First VARCHAR(15),
+	Last VARCHAR(15),
+	Email VARCHAR(20),
+	UserType VARCHAR(10)
+) ENGINE=InnoDB;
+
+INSERT INTO Faculty VALUES(31365019,'Narain','Gehani','ng101@njit.edu','Faculty');
+INSERT INTO Faculty VALUES(31366790,'Andrew','Sohn','as110@njit.edu','Faculty');
+INSERT INTO Faculty VALUES(31365894,'Michael','Baltrush','mb500@njit.edu','Faculty');
+
+DROP DATABASE Staff;
+
+CREATE TABLE Staff(
+	Id INT NOT NULL PRIMARY KEY,
+	First VARCHAR(15),
+	Last VARCHAR(15),
+	Email VARCHAR(20),
+	UserType VARCHAR(10),
+	StaffType VARCHAR(10)
+) ENGINE=InnoDB;
+
+INSERT INTO Staff VALUES(31310939,'Robert','Brown','rb501@njit.edu','Staff','Financial Aid');
+INSERT INTO Staff VALUES(31345603,'Bill','Thompson','bt120@njit.edu','Staff','Admissions');
+INSERT INTO Staff VALUES(31354792,'Sara','Wilson','sw304@njit.edu','Staff','Registrar');
+
+DROP DATABASE Executives;
+
+CREATE TABLE Executives(
+	Id INT NOT NULL PRIMARY KEY,
+	First VARCHAR(15),
+	Last VARCHAR(15),
+	Email VARCHAR(20),
+	UserType VARCHAR(10)
+) ENGINE=InnoDB;
+
+INSERT INTO Executives VALUES(31083941,'Joel','Bloom','jb123@njit.edu','Executive');
+
+DROP DATABASE SignOn;
+
+CREATE TABLE SignOn(
+	Id INT NOT NULL PRIMARY KEY,
+	Password VARCHAR(15),
+	UserType VARCHAR(10)
+) ENGINE=InnoDB;
+
+INSERT INTO SignOn VALUES(31368219,'password','Student');
+INSERT INTO SignOn VALUES(31368228,'password','Student');
+INSERT INTO SignOn VALUES(31368300,'password','Student');
+INSERT INTO SignOn VALUES(31369217,'password','Student');
+INSERT INTO SignOn VALUES(31366819,'password','Student');
+INSERT INTO SignOn VALUES(31368450,'password','Student');
+INSERT INTO SignOn VALUES(31368550,'password','Student');
+INSERT INTO SignOn VALUES(31368534,'password','Student');
+INSERT INTO SignOn VALUES(31368809,'password','Student');
+INSERT INTO SignOn VALUES(31368103,'password','Student');
+INSERT INTO SignOn VALUES(31365019,'password','Faculty');
+INSERT INTO SignOn VALUES(31366790,'password','Faculty');
+INSERT INTO SignOn VALUES(31365894,'password','Faculty');
+INSERT INTO SignOn VALUES(31310939,'password','Staff');
+INSERT INTO SignOn VALUES(31345603,'password','Staff');
+INSERT INTO SignOn VALUES(31354792,'password','Staff');
+INSERT INTO SignOn VALUES(31083941,'password','Executive');
+
+DROP DATABASE Bills;
+
+CREATE TABLE Bills(
+	Id INT NOT NULL PRIMARY KEY,
+	AmountOwed INT(7),
+	AmountPayed INT(7)
+) ENGINE=InnoDB;
+
+INSERT INTO Bills VALUES(31368219,10000,6000);
+INSERT INTO Bills VALUES(31368228,0,16000);
+INSERT INTO Bills VALUES(31368300,5000,11000);
+INSERT INTO Bills VALUES(31369217,2000,14000);
+INSERT INTO Bills VALUES(31366819,0,16000);
+INSERT INTO Bills VALUES(31368450,1000,15000);
+INSERT INTO Bills VALUES(31368550,0,16000);
+INSERT INTO Bills VALUES(31368534,8000,8000);
+INSERT INTO Bills VALUES(31368809,0,16000);
+INSERT INTO Bills VALUES(31368103,0,16000);
+
+DROP DATABASE Classes;
+
+CREATE TABLE Classes(
+	ClassId INT NOT NULL PRIMARY KEY,
+	ClassName VARCHAR(15),
+	Section VARCHAR(3),
+	ProfessorId INT NOT NULL
+) ENGINE=InnoDB;
+
+INSERT INTO Classes VALUES(12001,'CS431','001',31365019);
+INSERT INTO Classes VALUES(12002,'CS431','002',31365019);
+INSERT INTO Classes VALUES(12003,'CS288','001',31366790);
+INSERT INTO Classes VALUES(12004,'CS288','002',31366790);
+INSERT INTO Classes VALUES(12005,'CS252','001',31365894);
+INSERT INTO Classes VALUES(12006,'CS252','001',31365894);
+
+DROP DATABASE StudentsClasses;
+
+CREATE TABLE StudentsClasses(
+	Id INT,
+	ClassId INT(5),
+	Grade VARCHAR(15),
+	PRIMARY KEY(Id, ClassId)
+);
+
+INSERT INTO StudentsClasses VALUES(31368219,12001,'A');
+INSERT INTO StudentsClasses VALUES(31368219,12003,'B');
+INSERT INTO StudentsClasses VALUES(31368228,12001,'B');
+INSERT INTO StudentsClasses VALUES(31368228,12002,'B');
+INSERT INTO StudentsClasses VALUES(31368300,12001,'');
+INSERT INTO StudentsClasses VALUES(31368300,12003,'');
+INSERT INTO StudentsClasses VALUES(31369217,12002,'A');
+INSERT INTO StudentsClasses VALUES(31369217,12003,'A');
+INSERT INTO StudentsClasses VALUES(31366819,12001,'C');
+INSERT INTO StudentsClasses VALUES(31366819,12002,'');
+INSERT INTO StudentsClasses VALUES(31368450,12002,'A');
+INSERT INTO StudentsClasses VALUES(31368450,12003,'A');
+INSERT INTO StudentsClasses VALUES(31368550,12001,'B');
+INSERT INTO StudentsClasses VALUES(31368550,12003,'A');
+INSERT INTO StudentsClasses VALUES(31368534,12001,'');
+INSERT INTO StudentsClasses VALUES(31368534,12002,'C');
+INSERT INTO StudentsClasses VALUES(31368809,12001,'');
+INSERT INTO StudentsClasses VALUES(31368809,12003,'A');
+INSERT INTO StudentsClasses VALUES(31368103,12002,'');
+INSERT INTO StudentsClasses VALUES(31368103,12003,'B');
+
+DROP DATABASE EmployeePay;
+
+CREATE TABLE EmployeePay(
+	Id INT NOT NULL PRIMARY KEY,
+	WeeklyPay VARCHAR(15),
+	PayThisYear VARCHAR(15),
+	NextPayDate VARCHAR(10)
+) ENGINE=InnoDB;
+
+INSERT INTO EmployeePay VALUES(31365019,'2500','95,000','11/01/2017');
+INSERT INTO EmployeePay VALUES(31366790,'2500','95,000','11/01/2017');
+INSERT INTO EmployeePay VALUES(31365894,'2500','95,000','11/01/2017');
+INSERT INTO EmployeePay VALUES(31310939,'1500','75,000','11/01/2017');
+INSERT INTO EmployeePay VALUES(31345603,'1250','60,000','11/01/2017');
+INSERT INTO EmployeePay VALUES(31354792,'1400','72,000','11/01/2017');
+INSERT INTO EmployeePay VALUES(31083941,'7000','240,000','11/01/2017');
+
