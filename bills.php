@@ -1,10 +1,10 @@
 <?php
-// Start the session
+include_once 'db_connect.php';
 session_start();
 ?>
 
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>Welcome to Not-NJIT</title>
@@ -18,20 +18,39 @@ session_start();
 
 <body background = "images/background.jpg">
 
-<div class="container">
-  
-	 <form class="form-signin" action="login.php" method="POST">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputId" class="sr-only">Id Number</label>
-        <input type="text" id="inputId" name="id" class="form-control" placeholder="Id_Number" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" name="pwd" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-      <a href="register.php"> Register Here</a>
-</div>
-<div id="output"></div>
+	
+<?php 
+
+
+
+$id =  $_SESSION['u_id'];
+echo $id . "<br>";
+
+	$sql = "select AmountOwed, AmountPayed from Bills where Bills.Id = '$id';";
+
+if (!mysqli_query($conn, $sql)) {
+	die('Error '. mysql_error());
+} else {
+	$result = mysqli_query($conn,$sql);
+}
+
+if (mysqli_num_rows($result) > 0) {
+	while($row = mysqli_fetch_assoc($result)) {
+        echo "Money Owed: " . $row["AmountOwed"] . " - Money Paid: " . $row["AmountPayed"] . "<br>";
+
+    }
+} else {
+	echo "no results<p>";
+}
+
+
+
+?>
+
 
 
 </body>
 </html>
+
+
+

@@ -20,15 +20,21 @@ session_start();
 
 <div class="container">
   
-	 <form class="form-signin" action="login.php" method="POST">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputId" class="sr-only">Id Number</label>
-        <input type="text" id="inputId" name="id" class="form-control" placeholder="Id_Number" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
+	 <form class="form-signin" action="registerdo.php" method="POST">
+        <h2 class="form-signin-heading">Please Register</h2>
+        <label for="first" class="sr-only">First Name:</label>
+        <input type="text" id="first" name="first" class="form-control" placeholder="First Name" required autofocus>
+
+        <label for="last" class="sr-only">Last Name:</label>
+        <input type="text" id="last" name="last" class="form-control" placeholder="Last Name" required autofocus>
+
+        <label for="email" class="sr-only">Email:</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Email" required autofocus>
+
+        <label for="inputPassword" class="sr-only">Password:</label>
         <input type="password" id="inputPassword" name="pwd" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
-      <a href="register.php"> Register Here</a>
 </div>
 <div id="output"></div>
 

@@ -18,20 +18,9 @@ session_start();
 
 <body background = "images/background.jpg">
 
-	<?php
-		$sql = "select AmountOwed, AmountPayed from Bills, Students where Bills.Id = '$_SESSION['u_id']' and Student.Id = '$_SESSION['u_id']';";
-
-		if (!mysql_query($sql)) {
-			die('Error '. mysql_error());
-		} else {
-			$result = mysql_query($sql);
-		}
-
-		if (mysql_num_rows($result) > 0) {
-			while($row = mysql_fetch_assoc($result)) {
-        		echo "Money Owed: " . $row["AmountOwed"]. " - Money Paid: " . $row["AmountPayed"]. "<br>";
-		}
-	?>
+	<a href="bills.php">Bills</a>
+	<a href="courses.php">Courses</a>
+	<a href="info.php">Info</a>
 
 
 
