@@ -1,14 +1,10 @@
 <?php
-$servername = "localhost";
-$username = "username";
-$password = "password";
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password);
+define('DB_NAME', 'jat43');
+define('DB_USER', 'jat43');
+define('DB_PASSWORD', 'jupiter49');
+define('DB_HOST', 'sql.njit.edu');
 
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-echo "Connected successfully";
+$conn = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
 ?>

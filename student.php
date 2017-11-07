@@ -1,10 +1,10 @@
 <?php
-// Start the session
+include_once 'db_connect.php';
 session_start();
 ?>
 
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>Welcome to Not-NJIT</title>
@@ -18,19 +18,26 @@ session_start();
 
 <body background = "images/background.jpg">
 
-<div class="container">
-  
-	 <form class="form-signin" action="login.php" method="POST">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputId" class="sr-only">Id Number</label>
-        <input type="text" id="inputId" name="id" class="form-control" placeholder="Id_Number" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" name="pwd" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-</div>
-<div id="output"></div>
+	<?php
+		$sql = "select AmountOwed, AmountPayed from Bills, Students where Bills.Id = '$_SESSION['u_id']' and Student.Id = '$_SESSION['u_id']';";
+
+		if (!mysql_query($sql)) {
+			die('Error '. mysql_error());
+		} else {
+			$result = mysql_query($sql);
+		}
+
+		if (mysql_num_rows($result) > 0) {
+			while($row = mysql_fetch_assoc($result)) {
+        		echo "Money Owed: " . $row["AmountOwed"]. " - Money Paid: " . $row["AmountPayed"]. "<br>";
+		}
+	?>
+
+
 
 
 </body>
 </html>
+
+
+
