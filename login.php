@@ -37,11 +37,11 @@ if (mysql_num_rows($result) > 0) {
     $_SESSION['u_type'] = $row["UserType"];
     $_SESSION['u_id'] = $row["Id"];
 
-    if ($_SESSION['u_type'] = "Student") {
+    if ($_SESSION['u_type'] == "Student") {
     	header("Location:student.php");
-    } elseif ($_SESSION['u_type'] = "Staff") {
+    } elseif ($_SESSION['u_type'] == "Staff") {
     	header("Location:staff.php");
-    } elseif ($_SESSION['u_type'] = "Faculty") {
+    } elseif ($_SESSION['u_type'] == "Faculty") {
     	header("Location:faculty.php");
     } else {
     	header("Location:executive.php");

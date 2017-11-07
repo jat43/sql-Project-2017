@@ -18,11 +18,45 @@ session_start();
 
 <body background = "images/background.jpg">
 
-	<a href="bills.php">Bills</a>
-	<a href="courses.php">Courses</a>
-	<a href="info.php">Info</a>
 
-	<a href="logout.php">Logout here</a>
+
+	<?php 
+
+$id =  $_SESSION['u_id'];
+echo $id . "<br>";
+
+
+$sql = "select StaffType from Staff where Id = '$id';";
+
+
+if (!mysqli_query($conn, $sql)) {
+	die('Error '. mysqli_error());
+} else {
+	$result = mysqli_query($conn, $sql);
+}
+
+if (mysqli_num_rows($result) > 0) {
+	while($row = mysqli_fetch_assoc($result)) {
+    $_SESSION['u_Stype'] = $row["StaffType"];
+		
+    if ($_SESSION['u_Stype'] == "Registrar") {
+    	echo $_SESSION['u_Stype'];
+    } elseif ($_SESSION['u_Stype'] == "Admissions") {
+    	header("Location:admissions.php");
+    } else {
+    	#header("Location:registrar.php");
+    	header("Location:finance.php");
+    }
+
+    }
+} else {
+    echo "User Doesnt Exist";
+}
+
+
+mysqli_close();
+?>
+
 
 
 

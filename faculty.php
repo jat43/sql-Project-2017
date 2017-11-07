@@ -18,11 +18,45 @@ session_start();
 
 <body background = "images/background.jpg">
 
-	<a href="bills.php">Bills</a>
-	<a href="courses.php">Courses</a>
-	<a href="info.php">Info</a>
+	<h1>Classes I Teach</h1>
+
+	<?php 
+
+
+
+$id =  $_SESSION['u_id'];
+echo $id . "<br>";
+
+	$sql = "select ClassName, Section from Classes where ProfessorId = '$id';";
+
+if (!mysqli_query($conn, $sql)) {
+	die('Error '. mysql_error());
+} else {
+	$result = mysqli_query($conn,$sql);
+}
+
+if (mysqli_num_rows($result) > 0) {
+	while($row = mysqli_fetch_assoc($result)) {
+        echo "Class: " . $row["ClassName"] . " - Section: " . $row["Section"] . "<br>";
+
+    }
+} else {
+	echo "<h3>You have no classes</h3>";
+}
+
+
+
+?>
+
+
+
+	<a href="myStudent.php">My Students</a>
+	<a href="giveGrades.php">Grades</a>
+	<a href="facInfo.php">Info</a>
 
 	<a href="logout.php">Logout here</a>
+
+
 
 
 

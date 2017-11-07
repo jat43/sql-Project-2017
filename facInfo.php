@@ -18,11 +18,35 @@ session_start();
 
 <body background = "images/background.jpg">
 
-	<a href="bills.php">Bills</a>
-	<a href="courses.php">Courses</a>
-	<a href="info.php">Info</a>
+	
+<?php 
 
-	<a href="logout.php">Logout here</a>
+
+
+$id =  $_SESSION['u_id'];
+echo $id . "<br>";
+
+	$sql = "select First, Last, WeeklyPay, Email, PayThisYear, NextPayDate from EmployeePay, Faculty where Faculty.Id = '$id' and EmployeePay.Id = '$id';";
+
+if (!mysqli_query($conn, $sql)) {
+	die('Error '. mysqli_error());
+} else {
+	$result = mysqli_query($conn, $sql);
+}
+
+if (mysqli_num_rows($result) > 0) {
+	while($row = mysqli_fetch_assoc($result)) {
+        echo "Employee Info: " . $row["First"] . " " . $row["Last"] . ", " . $row["Email"] . " - Weekly Pay: " . $row["WeeklyPay"] . " - Pay Yearly: " .   $row["PayThisYear"] . " - Next Pay: " . $row["NextPayDate"] . "<br>";
+
+    }
+} else {
+	echo "no results<p>";
+}
+
+
+
+
+?>
 
 
 

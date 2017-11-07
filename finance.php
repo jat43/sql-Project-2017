@@ -1,4 +1,4 @@
-<?php
+<?php 
 include_once 'db_connect.php';
 session_start();
 ?>
@@ -18,16 +18,35 @@ session_start();
 
 <body background = "images/background.jpg">
 
-	<a href="bills.php">Bills</a>
-	<a href="courses.php">Courses</a>
-	<a href="info.php">Info</a>
 
-	<a href="logout.php">Logout here</a>
+<?php
+$Sid = $_POST['id'];
+$Cnum = $_POST['classNum'];
+$grd = $_POST['grade'];
 
+$uid =  $_SESSION['u_id'];
+echo $id . "<br>";
+
+	$sql = "select Id, AmountOwed, AmountPayed from Bills;";
+
+if (!mysqli_query($conn, $sql)) {
+	die('Error '. mysql_error());
+} else {
+	$result = mysqli_query($conn,$sql);
+}
+
+
+if (mysqli_num_rows($result) > 0) {
+	while($row = mysqli_fetch_assoc($result)) {
+        echo "Student #: " . $row["Id"] . " - Money Owed: " . $row["AmountOwed"] . " - Money Paid: " . $row["AmountPayed"] . "<br>";
+
+    }
+} else {
+	echo "<h3>Something went wrong</h3>";
+}
+
+?>
 
 
 </body>
 </html>
-
-
-

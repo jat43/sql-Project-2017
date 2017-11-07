@@ -18,11 +18,45 @@ session_start();
 
 <body background = "images/background.jpg">
 
-	<a href="bills.php">Bills</a>
-	<a href="courses.php">Courses</a>
-	<a href="info.php">Info</a>
+
+
+	<?php 
+
+
+
+$id =  $_SESSION['u_id'];
+echo $id . "<br>";
+
+	$sql = "select distinct Students.First, Students.Last, Students.Email from Students, Faculty, StudentsClasses, Classes where Students.Id = StudentsClasses.Id and StudentsClasses.ClassId = Classes.ClassId and Classes.ProfessorId = '$id';";
+
+if (!mysqli_query($conn, $sql)) {
+	die('Error '. mysql_error());
+} else {
+	$result = mysqli_query($conn,$sql);
+}
+
+if (mysqli_num_rows($result) > 0) {
+	while($row = mysqli_fetch_assoc($result)) {
+        echo "Student: " . $row["First"] . " " . $row["Last"] . " - Email: " . $row["Email"] . "<br>";
+
+    }
+} else {
+	echo "no results<p>";
+}
+
+
+
+?>
+
+
+
+	<a href="myStudent.php">My Students</a>
+	<a href="giveGrades.php">Grades</a>
+	<a href="facInfo.php">Info</a>
 
 	<a href="logout.php">Logout here</a>
+
+
 
 
 
